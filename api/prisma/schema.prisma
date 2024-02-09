@@ -1,0 +1,290 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id         Int      @id @default(autoincrement())
+  firstName  String   @map("first_name") @db.VarChar(50)
+  lastName   String?  @map("last_name") @db.VarChar(50)
+  email      String   @unique @db.VarChar(50)
+  password   String   @db.VarChar(255)
+  totpSecret String?  @map("totp_secret") @db.VarChar(16)
+  lastLogin  String?  @map("last_login") @db.VarChar(50)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  Course     Course[]
+
+  @@map("admin_users")
+}
+
+model User {
+  id                   Int                    @id @default(autoincrement())
+  firstName            String                 @map("first_name") @db.VarChar(50)
+  lastName             String?                @map("last_name") @db.VarChar(50)
+  email                String                 @unique @db.VarChar(50)
+  password             String                 @db.VarChar(255)
+  referedBy            Int                    @map("refered_by")
+  remainingPoints      Int                    @map("remaining_points")
+  totpSecret           String?                @map("totp_secret") @db.VarChar(16)
+  lastLogin            String?                @map("last_login") @db.VarChar(50)
+  referralCode         String?                @map("referral_code") @db.VarChar(250)
+  createdAt            DateTime               @default(now()) @map("created_at")
+  updatedAt            DateTime               @updatedAt @map("updated_at")
+  SubscribedCourse     SubscribedCourse[]
+  QuizParticipator     QuizParticipator[]
+  ParticipatorProgress ParticipatorProgress[]
+  Submission           Submission[]
+  referralToken        referralToken[]
+
+  @@map("users")
+}
+
+model CourseCategory {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(50)
+  status      Boolean  @default(false)
+  courseImage String   @map("course_image") @db.VarChar(255)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  Course      Course[]
+
+  @@map("course_categories")
+}
+
+model Instructor {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(256)
+  image     String   @db.VarChar(256)
+  createdAt DateTime @default(now()) @map("created_at")
+  Course    Course[]
+
+  @@map("instructor")
+}
+
+model Course {
+  id               Int      @id @default(autoincrement())
+  name             String   @db.VarChar(191)
+  shortDescription String   @map("short_description") @db.Text()
+  courseOverview   String   @map("course_overview") @db.Text()
+  Image            String   @map("image") @db.VarChar(255)
+  status           Boolean  @default(false)
+  categoryId       Int      @map("course_category_id")
+  instructorId     Int      @map("instructor_id")
+  courseLevel      String   @map("course_level") @db.VarChar(255)
+  createdBy        Int      @map("created_by")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  createdByUser     AdminUser               @relation(fields: [createdBy], references: [id])
+  instructor        Instructor              @relation(fields: [instructorId], references: [id])
+  courseCategory    CourseCategory?         @relation(fields: [categoryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  contentCategories CourseContentCategory[]
+  CourseContent     CourseContent[]
+  CourseQuestion    CourseQuestion[]
+  SubscribedCourse  SubscribedCourse[]
+  courseLearn       courseLearn[]
+
+  @@map("courses")
+}
+
+model courseLearn {
+  id        Int      @id @default(autoincrement())
+  courseId  Int      @map("course_id")
+  title     String   @db.VarChar(191)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  course Course? @relation(fields: [courseId], references: [id])
+
+  @@map("course_learn")
+}
+
+model CourseContentCategory {
+  id                   Int    @id @default(autoincrement())
+  courseId             Int    @map("course_id")
+  contentCategoryTitle String @map("content_category_title")
+
+  course         Course?          @relation(fields: [courseId], references: [id])
+  Image          String           @map("image") @db.VarChar(255)
+  courseContent  CourseContent[]
+  CourseQuestion CourseQuestion[]
+
+  @@map("course_content_categories")
+}
+
+model CourseContent {
+  id                Int                    @id @default(autoincrement())
+  courseId          Int                    @map("course_id")
+  contentCategoryId Int                    @map("content_category_id")
+  contentTitle      String                 @map("content_title") @db.VarChar(255)
+  content           String                 @db.Text()
+  Image             String                 @map("image") @db.VarChar(255)
+  course            Course?                @relation(fields: [courseId], references: [id])
+  contentCategory   CourseContentCategory? @relation(fields: [contentCategoryId], references: [id])
+  CourseProgress    CourseProgress[]
+
+  @@map("course_contents")
+}
+
+model CourseQuestion {
+  id                Int    @id @default(autoincrement())
+  courseId          Int    @map("course_id")
+  contentCategoryId Int    @map("content_category_id")
+  question          String @map("question") @db.Text()
+  choiceOne         String @map("choice_one") @db.Text()
+  choiceTwo         String @map("choice_two") @db.Text()
+  choiceThree       String @map("choice_three") @db.Text()
+  choiceFour        String @map("choice_four") @db.Text()
+  correntChoice     Json   @map("correct_choice") @db.Json()
+  isMulti           String @map("is_multi")
+
+  course               Course?                @relation(fields: [courseId], references: [id])
+  contentCategory      CourseContentCategory? @relation(fields: [contentCategoryId], references: [id])
+  QuizQuestion         QuizQuestion[]
+  ParticipatorProgress ParticipatorProgress[]
+
+  @@map("course_questions")
+}
+
+model SubscribedCourse {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map("user_id")
+  courseId     Int      @map("course_id")
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+
+  user           User?            @relation(fields: [userId], references: [id])
+  course         Course?          @relation(fields: [courseId], references: [id])
+  CourseProgress CourseProgress[]
+
+  @@map("subscribed_courses")
+}
+
+model CourseProgress {
+  id                 Int @id @default(autoincrement())
+  subscribedCourseId Int @map("subscribed_course_id")
+  courseContentId    Int @map("course_content_id")
+
+  subscribedCourse SubscribedCourse? @relation(fields: [subscribedCourseId], references: [id])
+  courseContent    CourseContent?    @relation(fields: [courseContentId], references: [id])
+
+  @@map("course_progress")
+}
+
+model Quiz {
+  id                   Int                    @id @default(autoincrement())
+  QuizTitle            String                 @map("quiz_title") @db.Text()
+  marks                Decimal                @db.Decimal()
+  createdAt            DateTime               @default(now()) @map("created_at")
+  QuizQuestion         QuizQuestion[]
+  QuizParticipator     QuizParticipator[]
+  ParticipatorProgress ParticipatorProgress[]
+
+  @@map("quiz")
+}
+
+model QuizQuestion {
+  id          Int @id @default(autoincrement())
+  quizId      Int @map("quiz_id")
+  questionsId Int @map("question_id")
+
+  quiz           Quiz?           @relation(fields: [quizId], references: [id])
+  courseQuestion CourseQuestion? @relation(fields: [questionsId], references: [id])
+
+  @@map("quiz_questions")
+}
+
+model QuizParticipator {
+  id                 Int     @id @default(autoincrement())
+  quizId             Int     @map("quiz_id")
+  userId             Int     @map("user_id")
+  totalObtainedMarks Decimal @map("total_obtained_marks") @db.Decimal()
+
+  quiz Quiz? @relation(fields: [quizId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
+
+  @@map("quiz_participators")
+}
+
+model ParticipatorProgress {
+  id          Int     @id @default(autoincrement())
+  quizId      Int     @map("quiz_id")
+  userId      Int     @map("user_id")
+  questionsId Int     @map("question_id")
+  isCorrect   Boolean @map("is_correct")
+
+  quiz           Quiz?           @relation(fields: [quizId], references: [id])
+  user           User?           @relation(fields: [userId], references: [id])
+  courseQuestion CourseQuestion? @relation(fields: [questionsId], references: [id])
+
+  @@map("participator_progress")
+}
+
+model StudyPlan {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  startDate String   @map("start_date") @db.VarChar(256)
+  endDate   String   @map("end_date") @db.VarChar(256)
+  title     String   @db.VarChar(256)
+  status    Boolean
+  color     String   @db.VarChar(256)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("study_plan")
+}
+
+model CodingChallenge {
+  id                Int          @id @default(autoincrement())
+  title             String       @db.Text
+  slug              String       @db.Text
+  question_type     String       @db.Text
+  level             String       @db.Text
+  problem_statement String       @db.Text
+  testcase          String       @db.Text
+  solution          String       @db.Text
+  solution_tester   String       @db.Text
+  template          String       @db.Text
+  Submission        Submission[]
+
+  @@map("coding_challenges")
+}
+
+model Submission {
+  id         Int      @id @default(autoincrement())
+  questionId Int      @map("question_id")
+  userId     Int      @map("user_id")
+  status     String   @db.Text
+  language   String   @db.Text
+  run_time   String   @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user     User?            @relation(fields: [userId], references: [id])
+  question CodingChallenge? @relation(fields: [questionId], references: [id])
+
+  @@map("submissions")
+}
+
+model Slider {
+  id        Int      @id @default(autoincrement())
+  image     String   @map("image") @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("slider")
+}
+
+model referralToken {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  token     String   @map("token") @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@map("referral_token")
+}
