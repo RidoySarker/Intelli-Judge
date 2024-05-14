@@ -21,11 +21,11 @@ export default function Home() {
             <Offcanvas />
             <Slider />
             {/*<Counter />*/}
-            <Course />
-            <Category />
+            {/*<Course />*/}
+            {/*<Category />*/}
             {/*<Testimonial />*/}
             {/*<Brand />*/}
-            <Blog />
+            {/*<Blog />*/}
             {/*<Action />*/}
             <Footer />
         </>

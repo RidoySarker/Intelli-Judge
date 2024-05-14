@@ -56,13 +56,13 @@ export default function Slider() {
 
                 <div className="slider-section section bg-color-2">
                     <div className="container">
-                        <div className="row justify-content-center align-items-center">
+                        <div className="row justify-content-center align-items-center mt-2">
                             <div className="col-md-6">
                                 <div className="slider-content">
-                                    <h2 className="title">Experience a learning platform that take you next level</h2>
-                                    <p>World-class training and development programs developed by top teachers</p>
-                                    <Link to="/course" className="btn btn-primary btn-hover-heading-color">Explore All
-                                        Courses</Link>
+                                    <h2 className="title">Experience a problem solving platform that take you next level</h2>
+                                    <p>Most interviewed problems and career paths developed by top programmers</p>
+                                    <Link to="/solve-problem" className="btn btn-primary btn-hover-heading-color">Explore All
+                                        Problems</Link>
                                 </div>
                             </div>
 
