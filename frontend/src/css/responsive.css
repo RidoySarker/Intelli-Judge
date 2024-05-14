@@ -1,0 +1,165 @@
+
+/* Desktops/Laptops */
+@media (max-width: 1500px)
+{
+    .q-heading
+    {
+        font-size: 30px;
+    }
+    .form-inner
+    {
+        width: 70%;
+    }
+    .side-img img
+    {
+        width: 100%;
+    }
+    .step-bar
+    {
+        width: 500px;
+    }
+    .question
+    {
+        right: 20%;
+    }
+}
+/* Desktops/Laptops */
+@media (max-width: 1200px)
+{
+    .q-heading
+    {
+        font-size: 23px;
+    }
+    .form-inner
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+    .radio-field
+    {
+        height: 70px;
+    }
+    .radio-field label
+    {
+        font-size: 18px;
+    }
+    .step-bar
+    {
+        width: 400px;
+    }
+    .question
+    {
+        right: 10%;
+        top: 25%;
+        width: auto;
+    }
+    .question img
+    {
+        width: 70%;
+    }
+
+}
+
+/* Laptops */
+@media (max-width: 1024px)
+{
+
+}
+
+/* Tablets */
+@media (max-width: 768px)
+{
+    .tab-100
+    {
+        width: 100%;
+    }
+    .tab-50
+    {
+        width: 50%;
+    }
+    .order-c
+    {
+        order: 2;
+    }
+    .next-prev
+    {
+        position: static;
+        display: flex;
+        width: auto;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .side-img
+    {
+        margin-top: 50px;
+    }
+    .next-prev button
+    {
+        width: 48%;
+        height: 70px;
+        font-size: 15px;
+    }
+    .step-bar
+    {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        align-items: center;
+        padding: 0 30px;
+        background-color: var(--field-color);
+    }
+    .question
+    {
+        right: 20%;
+        top: 12%;
+    }
+    .question img
+    {
+        width: 80%;
+    }
+    .next-prev .prev
+    {
+        margin-right: 0;
+    }
+}
+
+/* mobile */
+@media (max-width: 576px)
+{
+    .wrapper
+    {
+        width: 100%;
+        margin-left: 0;
+    }
+    .step-number
+    {
+        width: 100%;
+    }
+    .form-inner
+    {
+        margin: 50px 0;
+    }
+    .q-heading
+    {
+        font-size: 18px;
+    }
+    .next-prev button
+    {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .question
+    {
+        right: 10%;
+        top: 20%;
+    }
+    .next-prev .prev
+    {
+        margin-right: 0;
+    }
+    
+
+}

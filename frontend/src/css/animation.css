@@ -1,0 +1,141 @@
+.bounce-left
+{
+    animation: bounceleft 0.6s forwards linear;
+    opacity: 0;
+}
+@keyframes bounceleft
+{
+    0%
+    {
+        opacity: 0;
+        transform: translateX(-2000px);
+     }
+     60%
+     {
+        opacity: 1;
+        transform: translateX(30px);
+     }
+     80%
+     {
+        opacity: 1;
+        transform: translateX(-10px);
+     }
+     100%
+     {
+        opacity: 1;
+        transform: translateX(0);
+     }
+}
+.bounce-right
+{
+    animation: bounceright 0.6s forwards linear;
+    opacity: 1;
+}
+@keyframes bounceright
+{
+    0%
+    {
+        opacity: 1;
+        transform: translateX(0);
+     }
+     60%
+     {
+        opacity: 1;
+        transform: translateX(10px);
+     }
+     80%
+     {
+        opacity: 1;
+        transform: translateX(-30px);
+     }
+     100%
+     {
+        opacity: 0;
+        transform: translateX(2000px);
+     }
+}
+
+
+
+
+
+.delay-100
+{
+    animation-delay: 100ms;
+}
+.delay-200
+{
+    animation-delay: 200ms;
+}
+.delay-300
+{
+    animation-delay: 300ms;
+}
+.delay-400
+{
+    animation-delay: 400ms;
+}
+
+.checkmark:checked::before
+{
+    transform-origin: left top;
+    animation: checkmark linear both 0.3s;
+}
+@keyframes checkmark
+{
+      0%
+      {
+        height: 0px;
+        width: 0;
+        opacity: 0;
+        right: 75px;
+      }
+      30%
+      {
+        height: 15px;
+        width: 0;
+        opacity: 1;
+        right: 75px;
+      }
+      to
+      {
+        height: 15px;
+        width: 25px;
+        opacity: 1;
+      }
+}
+
+
+.next:hover i
+{
+    animation: left .4s forwards;
+}
+
+@keyframes left
+{
+    0%
+    {
+        transform: translateX(0px);
+    }
+    100%
+    {
+        transform: translateX(10px);
+    }
+}
+
+.prev:hover i
+{
+    animation: right .4s forwards;
+}
+
+@keyframes right
+{
+    0%
+    {
+        transform: translateX(0px);
+    }
+    100%
+    {
+        transform: translateX(-10px);
+    }
+}

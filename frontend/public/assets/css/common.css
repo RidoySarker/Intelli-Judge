@@ -1,0 +1,107 @@
+.carousel.carousel-slider{
+    height: 450px !important;
+}
+.quiz-select {
+    position: absolute !important;
+    top: -18px !important;
+    right: 8px !important;
+}
+
+.single-course-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 15px 0;
+    min-height: 250px;
+    max-height: 250px;
+}
+
+.course-description{
+    min-height: 75px;
+    max-height: 75px;
+}
+
+.section-padding {
+    padding-top: 20px;
+    padding-bottom: 90px;
+}
+
+.next-prev {
+    text-align: center;
+    position: unset !important;
+}
+
+.tag-warning {
+    border-radius: 5px;
+    background-color: rgba(59,188,167,0.071);
+    font-size: 14px;
+    font-weight: 600;
+    color: #27a1e9;
+    padding: 0 15px;
+    height: 25px;
+    line-height: 25px;
+}
+
+.badge-interview {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.badge-interview-primary {
+    color: #fff;
+    background-color: #007bff;
+}
+
+.badge-interview-info {
+    color: #fff;
+    background-color: #17a2b8;
+}
+
+.single-problem-list {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 15px 0;
+}
+
+button.outlined-default {
+    border: 1px solid rgba(0,0,0,.23);
+    color: rgba(0,0,0,.87);
+    background-color: transparent;
+    font-weight: 700;
+}
+
+.dark button.outlined-default {
+    --tw-border-opacity: 1;
+    border-color: rgb(193 193 198/var(--tw-border-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(193 193 198/var(--tw-text-opacity));
+}
+
+.navigation-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 700;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.flex {
+    display: flex;
+}
+
+.justify-between {
+    justify-content: space-between;
+}

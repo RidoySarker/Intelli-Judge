@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Sen:wght@400;700;800&amp;display=swap');
+
+:root {
+    --primary-gradiant: linear-gradient(70deg, rgb(188, 52, 62) 0%, rgb(240, 70, 81) 100%);
+    --primary-color: rgb(238, 69, 80);
+    --secondary-color: rgb(43, 211, 10);
+    --text-color: rgb(0, 0, 0);
+    --field-color: rgb(255, 255, 255);
+}
+
+body {
+    background-image: url(../images/bg.jpg);
+    background-size: cover;
+    width: 100%;
+    height: auto;
+
+}
+
+main {
+    min-height: 100vh;
+    width: 100%;
+    display: grid;
+    padding: 15px 0;
+    align-content: center;
+}
+
+.step-number {
+    top: 0;
+    right: 0;
+    width: 321px;
+    height: 67px;
+}
+
+.step-number-inner {
+    background: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.step-number-inner span {
+    margin-left: 5px;
+}
+
+.side-img {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    align-content: center;
+}
+
+.side-img img {
+    width: auto;
+}
+
+.step-bar {
+    display: flex;
+    justify-content: space-between;
+    height: auto;
+    width: 650px;
+    position: absolute;
+    left: 60px;
+    bottom: 60px;
+}
+
+.step-bar .bar {
+    background-color: rgb(226, 226, 226);
+    width: 18%;
+    height: 11px;
+    border-radius: 8px;
+    overflow: hidden;
+
+}
+
+.step-bar .bar .fill {
+    background-color: var(--primary-color);
+    transition: 0.5s linear;
+    width: 0;
+    height: 100%;
+}
+
+.wrapper {
+    width: 70%;
+    margin: 0 auto 0 100px;
+}
+
+.question {
+    position: absolute;
+    width: 20%;
+    height: auto;
+    top: 34%;
+    right: 24%;
+    transform: rotate(180deg);
+    z-index: 0;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.question img {
+    width: 100%;
+}
+
+
+.q-heading {
+    font-size: 22px;
+    font-family: "Sen";
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+form {
+    overflow: hidden;
+}
+
+.form-inner {
+    margin: 70px auto;
+    width: 65%;
+    margin-left: 100px;
+    z-index: 10;
+    position: relative;
+}
+
+
+.radio-field {
+    position: relative;
+    width: 100%;
+    height: 80px;
+    display: grid;
+    place-content: center;
+    margin-bottom: 10px;
+}
+
+.radio-field input {
+    -webkit-appearance: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    outline: solid 1px rgb(225, 225, 225);
+    border: solid 4px transparent;
+    border-radius: 7px;
+    background-color: var(--field-color);
+    box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+    transition: 0.4s;
+
+}
+
+.radio-field label {
+    position: relative;
+    z-index: 10;
+    font-size: 16px;
+    font-family: "Sen";
+    padding: 18px;
+    font-weight: 600;
+    color: var(--text-color);
+    pointer-events: none;
+}
+
+.radio-field input:checked {
+    border: solid 4px var(--secondary-color);
+    outline: none;
+}
+
+.radio-field input:checked::before {
+    content: "";
+    position: absolute;
+    border-left: solid 5px var(--secondary-color);
+    border-bottom: solid 5px var(--secondary-color);
+    top: 10px;
+    right: 5px;
+    width: 25px;
+    height: 15px;
+    transform: rotate(-45deg);
+    border-radius: 3px;
+    opacity: 0;
+}
+
+.next-prev {
+    width: auto;
+    height: auto;
+    position: absolute;
+    right: 60px;
+    bottom: 60px;
+}
+
+.next-prev button {
+    width: 242px;
+    height: 74px;
+    border: solid 1px rgb(225, 225, 225);
+    border-radius: 9px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 2px 21px 0px rgba(0, 0, 0, 0.03);
+    font-size: 18px;
+    font-family: "Sen";
+    color: var(--text-color);
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.next-prev .next, .next-prev .apply {
+    background: var(--primary-gradiant);
+    border: 0;
+    color: var(--field-color);
+}
+
+.next-prev .prev {
+    margin-right: 40px;
+}
+
+.next-prev button i {
+    margin: 0 7px;
+}
+
+#error div {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+}
+  

@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("../../fonts/flaticon8953.ttf?9da6da3c6ae6f38ca4698081ef934ea0") format("truetype"),
+url("../../fonts/flaticon8953.woff?9da6da3c6ae6f38ca4698081ef934ea0") format("woff"),
+url("../../fonts/flaticon8953.woff2?9da6da3c6ae6f38ca4698081ef934ea0") format("woff2"),
+url("../../fonts/flaticon8953.eot?9da6da3c6ae6f38ca4698081ef934ea0#iefix") format("embedded-opentype"),
+url("../../fonts/flaticon8953.svg?9da6da3c6ae6f38ca4698081ef934ea0#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-shopping-cart:before {
+    content: "\f101";
+}
+.flaticon-favorites:before {
+    content: "\f102";
+}
+.flaticon-atom:before {
+    content: "\f103";
+}
+.flaticon-left-quotes-sign:before {
+    content: "\f104";
+}
+.flaticon-phone-call:before {
+    content: "\f105";
+}
+.flaticon-open-mail:before {
+    content: "\f106";
+}
+.flaticon-placeholder:before {
+    content: "\f107";
+}
+.flaticon-loupe:before {
+    content: "\f108";
+}
+.flaticon-mail:before {
+    content: "\f109";
+}
