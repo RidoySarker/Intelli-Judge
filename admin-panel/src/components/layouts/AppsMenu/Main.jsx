@@ -45,7 +45,9 @@ const Main = () => {
                         {/*</li>*/}
 
                         <li className="nav-item">
-                            <Link className={location.pathname === "/coding-challenge-list" ? 'nav-link' : 'nav-link-disable'} to="/coding-challenge-list">Coding Challenge </Link>
+                            <Link
+                                className={location.pathname === "/coding-challenge-list" ? 'nav-link' : 'nav-link-disable'}
+                                to="/coding-challenge-list">Coding Challenge </Link>
                         </li>
 
                         {/*<li className="nav-item">*/}
@@ -61,7 +63,13 @@ const Main = () => {
                         {/*</li>*/}
 
                         <li className="nav-item">
-                            <Link className={location.pathname === "/sliders" ? 'nav-link' : 'nav-link-disable'} to="/sliders">Sliders</Link>
+                            <Link className={location.pathname === "/submissions" ? 'nav-link' : 'nav-link-disable'}
+                                  to="/submissions">Coding Submission</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className={location.pathname === "/sliders" ? 'nav-link' : 'nav-link-disable'}
+                                  to="/sliders">Sliders</Link>
                         </li>
 
                     </ul>
