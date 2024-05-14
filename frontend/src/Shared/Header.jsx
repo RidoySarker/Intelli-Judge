@@ -29,28 +29,28 @@ export default function Header() {
                                 </a>
                                 <Link to="/"><h3><b> Interview With Me</b></h3></Link>
                             </li>
-                            <li style={{marginTop: '6px'}}>
-                                <Link to="/">Home</Link>
-                                {/* < href="..">Home</a> */}
-                            </li>
+                            {/*<li style={{marginTop: '6px'}}>*/}
+                            {/*    <Link to="/">Home</Link>*/}
+                            {/*    /!* < href="..">Home</a> *!/*/}
+                            {/*</li>*/}
                             {/*<li>*/}
                             {/*    <Link to="/about"> <i className='fa fa-'></i> About</Link>*/}
                             {/*</li>*/}
-                            <li style={{marginTop: '6px'}}>
-                                <Link to="/course">Course</Link>
-                            </li>
-                            {isLoggedIn && (
-                                <li style={{marginTop: '6px'}}>
-                                    <Link to="/quiz">Quiz</Link>
-                                </li>)}
+                            {/*<li style={{marginTop: '6px'}}>*/}
+                            {/*    <Link to="/course">Course</Link>*/}
+                            {/*</li>*/}
+                            {/*{isLoggedIn && (*/}
+                            {/*    <li style={{marginTop: '6px'}}>*/}
+                            {/*        <Link to="/quiz">Quiz</Link>*/}
+                            {/*    </li>)}*/}
                             {isLoggedIn && (
                                 <li style={{marginTop: '6px'}}>
                                     <Link to="/solve-problem">Solve Problem</Link>
                                 </li>)}
-                            {isLoggedIn && (
-                                <li style={{marginTop: '6px'}}>
-                                    <Link to="/study-plan"> Study Plan</Link>
-                                </li>)}
+                            {/*{isLoggedIn && (*/}
+                            {/*    <li style={{marginTop: '6px'}}>*/}
+                            {/*        <Link to="/study-plan"> Study Plan</Link>*/}
+                            {/*    </li>)}*/}
 
                         </ul>
                     </div>
