@@ -43,6 +43,7 @@ model User {
   ParticipatorProgress ParticipatorProgress[]
   Submission           Submission[]
   referralToken        referralToken[]
+  CodingChallenge      CodingChallenge[]
 
   @@map("users")
 }
@@ -240,17 +241,21 @@ model StudyPlan {
 }
 
 model CodingChallenge {
-  id                Int          @id @default(autoincrement())
-  title             String       @db.Text
-  slug              String       @db.Text
-  question_type     String       @db.Text
-  level             String       @db.Text
-  problem_statement String       @db.Text
-  testcase          String       @db.Text
-  solution          String       @db.Text
-  solution_tester   String       @db.Text
-  template          String       @db.Text
-  Submission        Submission[]
+  id                Int    @id @default(autoincrement())
+  title             String @db.Text
+  slug              String @db.Text
+  question_type     String @db.Text
+  level             String @db.Text
+  problem_statement String @db.Text
+  testcase          String @db.Text
+  solution          String @db.Text
+  solution_tester   String @db.Text
+  template          String @db.Text
+  userId            Int?   @map("user_id")
+  is_approved       Int    @db.Int @default(0)
+
+  user       User?        @relation(fields: [userId], references: [id])
+  Submission Submission[]
 
   @@map("coding_challenges")
 }

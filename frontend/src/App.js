@@ -13,6 +13,8 @@ import QuizQuestion from "./Component/quiz/QuizQuestion";
 import MyProfile from "./Pages/MyProfile";
 import StudyPlan from "./Component/Home/StudyPlan";
 import SolveProblem from "./Pages/SolveProblem";
+import Contribute from "./Pages/Contribute";
+import CodeUpload from "./Pages/CodeUpload";
 import SolveProblemDetails from "./Pages/SolveProblemDetails";
 import MySubmissions from "./Pages/MySubmissions";
 import UserReferralList from "./Pages/UserReferralList";
@@ -31,6 +33,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path='/quiz' element={<Quiz />} />
           <Route path='/solve-problem' element={<SolveProblem />} />
+          <Route path='/contribute' element={<Contribute />} />
+          <Route path='/code-upload' element={<CodeUpload />} />
           <Route path='/my-submissions' element={<MySubmissions />} />
           <Route path='/solve-problem/:question_id' element={<SolveProblemDetails />} />
           <Route path='/quiz-question/:quiz_id' element={<QuizQuestion />} />

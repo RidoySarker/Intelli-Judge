@@ -27,7 +27,7 @@ export default function Header() {
                                 <a href="/">
                                     <img src="/assets/images/logo.png" alt=""/>
                                 </a>
-                                <Link to="/"><h3><b> Interview With Me</b></h3></Link>
+                                <Link to="/"><h3><b> Intelli Judge</b></h3></Link>
                             </li>
                             {/*<li style={{marginTop: '6px'}}>*/}
                             {/*    <Link to="/">Home</Link>*/}
@@ -47,10 +47,10 @@ export default function Header() {
                                 <li style={{marginTop: '6px'}}>
                                     <Link to="/solve-problem">Solve Problem</Link>
                                 </li>)}
-                            {/*{isLoggedIn && (*/}
-                            {/*    <li style={{marginTop: '6px'}}>*/}
-                            {/*        <Link to="/study-plan"> Study Plan</Link>*/}
-                            {/*    </li>)}*/}
+                            {isLoggedIn && (
+                                <li style={{marginTop: '6px'}}>
+                                    <Link to="/contribute"> Contribute </Link>
+                                </li>)}
 
                         </ul>
                     </div>
@@ -61,7 +61,7 @@ export default function Header() {
 
                         <div className="header-search d-none d-lg-block" style={{marginRight: '24px'}}>
                             <form action="#">
-                                <input type="text" placeholder="Search Courses"/>
+                                <input type="text" placeholder="Search"/>
                                 <button><i className="flaticon-loupe"></i></button>
                             </form>
                         </div>

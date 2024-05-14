@@ -50,6 +50,7 @@ import {
 import { contentDetails } from '../src/controllers/api/v1/courseContent/fetchCourseContentDetails';
 import { generateQuestion } from '../src/controllers/api/v1/questionGenerate/questionGenerateController';
 import { submission } from '../src/controllers/api/v1/online-judge/submissionController';
+import { userCodeUpload } from '../src/controllers/api/v1/online-judge/UserCodeUploadController';
 
 const fileUpload = require('express-fileupload');
 
@@ -172,6 +173,8 @@ router.delete('/quizs/:id', quizController.destroy);
 
 //coding challenge
 router.post('/add-coding-challenge', courseQuestionValidate(), codingChallenge.store);
+router.put('/coding-challenge/:id', courseQuestionValidate(), codingChallenge.update);
+router.get('/coding-challenge/:id', codingChallenge.show);
 
 //quizQuestion
 router.get('/quiz-questions', quizQuestionController.index);
@@ -270,4 +273,5 @@ router.get(
 router.post('/submission', submission);
 router.post('/quiz-submission', frontendApiController.submitQuiz);
 router.get('/quiz-result', frontendApiController.submitResult);
+router.post('/frontend/user-code-upload', courseQuestionValidate() ,userCodeUpload);
 export default router;

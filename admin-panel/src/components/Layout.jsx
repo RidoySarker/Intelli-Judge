@@ -16,6 +16,7 @@ import CourseContentForm from "./pages/Domain/courseContent/courseContentForm";
 import CourseQuestionForm from "./pages/Domain/courseQuestion/courseQuestionForm";
 import CourseForm from "./pages/Domain/course/courseForm";
 import CodingChallengeAdd from "./pages/Domain/codingChallenge/CodingChallengeAdd";
+import CodingChallengeEdit from "./pages/Domain/codingChallenge/CodingChallengeEdit";
 import CodingChallengeList from "./pages/Domain/codingChallenge/CodingChallengeList";
 import Instructor from "./pages/Domain/instructor/instructor";
 import Slider from "./pages/Domain/slider/slider";
@@ -48,6 +49,7 @@ const Layout = () => {
                                 <Route path="/course-content" element={<CourseContent/>}/>
                                 <Route path="/course-question" element={<CourseQuestion/>}/>
                                 <Route path="/coding-challenge" element={<CodingChallengeAdd/>}/>
+                                <Route path="/coding-challenge/:id/edit" element={<CodingChallengeEdit/>}/>
                                 <Route path="/coding-challenge-list" element={<CodingChallengeList/>}/>
                                 <Route path="/quizs" element={<Quiz/>}/>
                                 <Route path="/quiz-questions" element={<QuizQuestion/>}/>
