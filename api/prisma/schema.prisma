@@ -252,7 +252,7 @@ model CodingChallenge {
   solution_tester   String @db.Text
   template          String @db.Text
   userId            Int?   @map("user_id")
-  is_approved       Int    @db.Int @default(0)
+  is_approved       Int    @default(0) @db.Int
 
   user       User?        @relation(fields: [userId], references: [id])
   Submission Submission[]

@@ -282,6 +282,19 @@ const fetchProblems = async (request, response) => {
 		.send(success(problems, 'problems fetched successfully', HTTP_OK));
 };
 
+const fetchUserProblems = async (request, response) => {
+	let problems = await prisma.codingChallenge.findMany({
+		where : {
+			userId: {
+				not : null
+			}
+		}
+	});
+	return response
+		.status(HTTP_OK)
+		.send(success(problems, 'problems fetched successfully', HTTP_OK));
+};
+
 const fetchSubmissions = async (request, response) => {
     const email = request.params.email;
     const user = await prisma.user.findUnique({
@@ -516,6 +529,7 @@ export {
 	fetchTotalCourse,
 	checkUserSubscribedCourse,
 	fetchProblems,
+	fetchUserProblems,
 	fetchSubmissions,
 	fetchAllSubmissions,
 	fetchSingleProblem,

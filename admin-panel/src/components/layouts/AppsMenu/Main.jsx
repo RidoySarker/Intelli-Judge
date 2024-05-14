@@ -50,6 +50,12 @@ const Main = () => {
                                 to="/coding-challenge-list">Coding Challenge </Link>
                         </li>
 
+                        <li className="nav-item">
+                            <Link
+                                className={location.pathname === "/user-contribute-list" ? 'nav-link' : 'nav-link-disable'}
+                                to="/user-contribute-list">User Contribute </Link>
+                        </li>
+
                         {/*<li className="nav-item">*/}
                         {/*    <Link className={location.pathname === "/quizs" ? 'nav-link' : 'nav-link-disable'} to="/quizs">Quiz</Link>*/}
                         {/*</li>*/}

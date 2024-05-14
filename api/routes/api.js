@@ -45,7 +45,7 @@ import quizParticipatorRequestValidate from '../src/formRequests/v1/quizParticip
 import participatorProgressRequestValidate from '../src/formRequests/v1/participatorProgress/participatorProgressRequestValidate';
 import {
 	fetchCourse,
-	fetchCourseContent
+	fetchCourseContent, fetchUserProblems
 } from '../src/controllers/api/v1/frontend/frontendApiController';
 import { contentDetails } from '../src/controllers/api/v1/courseContent/fetchCourseContentDetails';
 import { generateQuestion } from '../src/controllers/api/v1/questionGenerate/questionGenerateController';
@@ -260,6 +260,7 @@ router.get('/frontend/fetch-quiz', frontendApiController.fetchQuizTopic);
 router.get('/frontend/search-quiz-question', frontendApiController.searchQuizQuestion);
 router.get('/frontend/fetch-quiz-question/:id', frontendApiController.quizQuestions);
 router.get('/frontend/fetch-problems', frontendApiController.fetchProblems);
+router.get('/frontend/fetch-user-problems', frontendApiController.fetchUserProblems);
 router.get('/frontend/fetch-submissions/:email', frontendApiController.fetchSubmissions);
 router.get('/frontend/fetch-all-submissions', frontendApiController.fetchAllSubmissions);
 router.get('/frontend/fetch-problems/:question_id', frontendApiController.fetchSingleProblem);
