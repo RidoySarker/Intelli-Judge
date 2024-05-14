@@ -20,6 +20,7 @@ import CodingChallengeEdit from "./pages/Domain/codingChallenge/CodingChallengeE
 import CodingChallengeList from "./pages/Domain/codingChallenge/CodingChallengeList";
 import Instructor from "./pages/Domain/instructor/instructor";
 import Slider from "./pages/Domain/slider/slider";
+import CodingSubmissionList from "./pages/Domain/codingSubmission/CodingSubmissionList";
 
 const Layout = () => {
     return (<>
@@ -56,6 +57,7 @@ const Layout = () => {
                                 <Route path="/new-course-content" element={<CourseContentForm/>}/>
                                 <Route path="/new-course-question" element={<CourseQuestionForm/>}/>
                                 <Route path="/instructors" element={<Instructor/>}/>
+                                <Route path="/submissions" element={<CodingSubmissionList />}/>
                                 <Route path="/sliders" element={<Slider />}/>
                             </Routes>
                         </div>
