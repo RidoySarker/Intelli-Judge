@@ -276,7 +276,26 @@ const checkUserSubscribedCourse = async (request, response) => {
 };
 
 const fetchProblems = async (request, response) => {
-	let problems = await prisma.codingChallenge.findMany();
+	let problems = await prisma.codingChallenge.findMany({
+		where: {
+			is_approved: 1
+		}
+	});
+	return response
+		.status(HTTP_OK)
+		.send(success(problems, 'problems fetched successfully', HTTP_OK));
+};
+
+const fetchContributes = async (request, response) => {
+	let email = request.query.email;
+	let problems = await prisma.codingChallenge.findMany({
+		where: {
+			user: {
+				email: email,
+			},
+		}
+	});
+
 	return response
 		.status(HTTP_OK)
 		.send(success(problems, 'problems fetched successfully', HTTP_OK));
@@ -529,6 +548,7 @@ export {
 	fetchTotalCourse,
 	checkUserSubscribedCourse,
 	fetchProblems,
+	fetchContributes,
 	fetchUserProblems,
 	fetchSubmissions,
 	fetchAllSubmissions,

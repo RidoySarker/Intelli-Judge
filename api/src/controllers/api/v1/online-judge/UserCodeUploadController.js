@@ -1,4 +1,4 @@
-import {error, success} from "../../../../helpers/apiResponse";
+import { error, success } from "../../../../helpers/apiResponse";
 import {
     HTTP_CREATED,
     HTTP_INTERNAL_SERVER_ERROR,
@@ -9,9 +9,9 @@ import logger from "../../../../services/logger/loggerService";
 import RunnerManager from "../../../../services/onlineJudge/RunnerManager"
 import moment from "moment";
 import * as fs from "fs";
-import {sleep} from "../../../../services/onlineJudge/Sleeper";
+import { sleep } from "../../../../services/onlineJudge/Sleeper";
 import prisma from "../../../../services/prisma/prisma";
-import {validationResult} from "express-validator";
+import { validationResult } from "express-validator";
 import path from "path";
 import appRoot from "app-root-path";
 import FileApi from "../../../../services/onlineJudge/FileApi";
@@ -70,7 +70,7 @@ const userCodeUpload = async (request, response) => {
                 solution: solution,
                 solution_tester: solution_tester,
                 template: template,
-                userId: user.id,
+                userId: user?.id,
                 is_approved: 0,
             }
         });
@@ -82,4 +82,4 @@ const userCodeUpload = async (request, response) => {
     }
 }
 
-export {userCodeUpload};
+export { userCodeUpload };

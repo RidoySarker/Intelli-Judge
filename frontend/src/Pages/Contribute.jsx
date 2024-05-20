@@ -1,8 +1,8 @@
 import Header from "../Shared/Header";
 import Offcanvas from "../Shared/Offcanvas";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import http from "../interceptors/http";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import PageBannerStart from "../Component/Course/PageBannerStart";
 
 export default function SolveProblem() {
@@ -10,8 +10,13 @@ export default function SolveProblem() {
 
     const getProblems = async () => {
         try {
-            const {data: data} = await http.get(`frontend/fetch-problems`);
-            // console.log(data.data)
+            let email = localStorage.getItem('userEmail');
+            const {data: data} = await http.get(`frontend/fetch-contributes`, {
+                params: {
+                    email: email,
+                }
+            });
+
             setProblems(data.data);
         } catch (error) {
             console.log(error)

@@ -63,6 +63,7 @@ const store = async (request, response) => {
                 solution: solution,
                 solution_tester: solution_tester,
                 template: template,
+                is_approved: 1,
             }
         });
         logger.info('create coding challenge');
