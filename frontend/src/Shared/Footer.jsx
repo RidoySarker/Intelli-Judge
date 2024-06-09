@@ -84,7 +84,7 @@ export default function Footer() {
 
                 {/* <!-- Footer Copyright End --> */}
                 <div className="footer-copyright text-center">
-                     <p>&copy; Copyrights 2023 Interview With ME </p>
+                     <p>&copy; Copyrights 2024 Intelli Judge </p>
                 </div>
                 {/* <!-- Footer Copyright End --> */}
 
