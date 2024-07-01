@@ -293,3 +293,16 @@ model referralToken {
 
   @@map("referral_token")
 }
+
+model contest {
+  id         Int      @id @default(autoincrement())
+  title      String   @map("title")
+  slug       String   @map("slug")
+  accessCode String   @map("access_code")
+  startTime  DateTime @map("start_time")
+  endTime    DateTime @map("end_time")
+  status     Int      @map("status")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("contest")
+}
