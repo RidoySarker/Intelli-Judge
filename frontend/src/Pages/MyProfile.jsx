@@ -127,39 +127,39 @@ export default function MyProfile() {
                                             />
                                         </div>
                                     </div>
-                                    <div className="row mt-3">
-                                        <div className="col-md-10">
-                                            <label id='refer'>Refer Your Friends</label>
-                                            <div className="input-group mb-3">
+                                    {/*<div className="row mt-3">*/}
+                                    {/*    <div className="col-md-10">*/}
+                                    {/*        <label id='refer'>Refer Your Friends</label>*/}
+                                    {/*        <div className="input-group mb-3">*/}
 
-                                                <input type="text" className="form-control"
-                                                       value={getUrl}
-                                                       aria-label="Amount (to the nearest dollar)"/>
-                                                <span style={{
-                                                    cursor: "pointer",
-                                                    border: '0px',
-                                                    background: 'aliceblue'
-                                                }} className="input-group-text"
-                                                      onClick={handleCopy}
-                                                > <i
-                                                    className="fa fa-clipboard"></i></span>
-                                                {copied && (
-                                                    <img height="50"
-                                                         src="/assets/images/wired-outline-499-clipboard-film-clap.gif"
-                                                         alt=""/>
-                                                )}
+                                    {/*            <input type="text" className="form-control"*/}
+                                    {/*                   value={getUrl}*/}
+                                    {/*                   aria-label="Amount (to the nearest dollar)"/>*/}
+                                    {/*            <span style={{*/}
+                                    {/*                cursor: "pointer",*/}
+                                    {/*                border: '0px',*/}
+                                    {/*                background: 'aliceblue'*/}
+                                    {/*            }} className="input-group-text"*/}
+                                    {/*                  onClick={handleCopy}*/}
+                                    {/*            > <i*/}
+                                    {/*                className="fa fa-clipboard"></i></span>*/}
+                                    {/*            {copied && (*/}
+                                    {/*                <img height="50"*/}
+                                    {/*                     src="/assets/images/wired-outline-499-clipboard-film-clap.gif"*/}
+                                    {/*                     alt=""/>*/}
+                                    {/*            )}*/}
 
-                                            </div>
-                                        </div>
+                                    {/*        </div>*/}
+                                    {/*    </div>*/}
 
-                                    </div>
+                                    {/*</div>*/}
                                     <div className="mt-5 text-right">
                                         <button className="btn btn-outline-info" type="submit">Update Profile
                                         </button>
                                         &nbsp;&nbsp;
-                                        <button className="btn btn-outline-success" type="button"
-                                                onClick={() => referralUsers()}>Referral Users
-                                        </button>
+                                        {/*<button className="btn btn-outline-success" type="button"*/}
+                                        {/*        onClick={() => referralUsers()}>Referral Users*/}
+                                        {/*</button>*/}
                                     </div>
                                 </div>
                             </form>

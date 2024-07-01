@@ -18,6 +18,7 @@ import CodeUpload from "./Pages/CodeUpload";
 import SolveProblemDetails from "./Pages/SolveProblemDetails";
 import MySubmissions from "./Pages/MySubmissions";
 import UserReferralList from "./Pages/UserReferralList";
+import Dashboard from "./Pages/Dashboard";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/register/:id" element={<Register />} />
           <Route path="/study-plan" element={<StudyPlan />} />
           <Route path="/referral-users" element={<UserReferralList />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
     </div>
   );
