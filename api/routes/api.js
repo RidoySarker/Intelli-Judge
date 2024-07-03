@@ -268,10 +268,12 @@ router.get('/frontend/fetch-problems/:question_id', frontendApiController.fetchS
 router.get('/frontend/fetch-sliders', frontendApiController.fetchSliders);
 router.get('/frontend/fetch-latest-course', frontendApiController.fetchLatestCourse);
 router.get('/frontend/fetch-referral-user/:email', frontendApiController.fetchReferralUser);
+router.get('/frontend/fetch-dashboard', frontendApiController.fetchDashboard);
 router.get(
 	'/frontend/fetch-multiple-category-wise-course',
 	frontendApiController.fetchMultipleCategoryCourse
 );
+
 
 router.post('/submission', submission);
 router.post('/quiz-submission', frontendApiController.submitQuiz);

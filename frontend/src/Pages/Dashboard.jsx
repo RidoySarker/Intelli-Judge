@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../Shared/Header";
 import Offcanvas from "../Shared/Offcanvas";
 import PageBannerStart from "../Component/Course/PageBannerStart";
@@ -6,6 +6,7 @@ import Chart from "react-apexcharts";
 import CalendarHeatmap from 'react-calendar-heatmap';
 import ReactTooltip from 'react-tooltip';
 import 'react-calendar-heatmap/dist/styles.css';
+import http from "../interceptors/http";
 
 const today = new Date();
 const Dashboard = () => {
@@ -62,6 +63,24 @@ const Dashboard = () => {
     function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
+
+    const fetchDashboardData = async () => {
+        try {
+            let email = localStorage.getItem('userEmail');
+            const {data: data} = await http.get(`/frontend/fetch-dashboard`, {
+                params: {
+                    email: email,
+                }
+            });
+            console.log({data});
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchDashboardData();
+    }, []);
 
     return (<>
         <Header/>
@@ -134,10 +153,10 @@ const Dashboard = () => {
                 <div className="row mt-1">
                     <div className="col-lg-2"></div>
                     <div className="col-lg-10">
-                        <div className="card" style={{height:"35vh"}}>
+                        <div className="card" style={{height: "35vh"}}>
                             <h3 className="p-1">0 Submission last 150days</h3>
                             <CalendarHeatmap
-                                startDate={shiftDate(today, -150)}
+                                startDate={shiftDate(today, -200)}
                                 endDate={today}
                                 values={randomValues}
                                 classForValue={value => {
