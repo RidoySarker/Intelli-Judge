@@ -26,7 +26,6 @@ const ContestForm = () => {
             end_time: Yup.string().required('End Time Is Required'),
         }), onSubmit: (values, {resetForm}) => {
             values['status'] = 1;
-            console.log({values});
             http.post(`/contest`, values, {
                 headers: {
                     "Content-Type": "application/json"
@@ -34,6 +33,7 @@ const ContestForm = () => {
             }).then(({data}) => {
                 toast.success("Contest Added Successfully");
                 resetForm({values: ''});
+                window.location = '/contest';
             }).catch(({error}) => {
                 console.error(error)
             });

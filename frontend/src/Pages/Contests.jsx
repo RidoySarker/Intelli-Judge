@@ -58,7 +58,7 @@ export default function Contests() {
                                                     <a className="btn btn-outline-primary">
                                                     <Link
                                                         className="text-black"
-                                                        to={`/solve-problem/${contest.slug}`}>Join It Now!</Link>
+                                                        to={`/contests/${contest.slug}`}>Join It Now!</Link>
                                                     </a>
                                                 </div>
                                                 <span
