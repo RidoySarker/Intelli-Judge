@@ -50,6 +50,10 @@ export default function Header() {
                                 <li style={{marginTop: '6px'}}>
                                     <Link to="/contribute"> Contribute </Link>
                                 </li>)}
+                            {isLoggedIn && (
+                                <li style={{marginTop: '6px'}}>
+                                    <Link to="/contests"> Coding Contest </Link>
+                                </li>)}
 
                         </ul>
                     </div>

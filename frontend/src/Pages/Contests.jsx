@@ -5,48 +5,39 @@ import http from "../interceptors/http";
 import { Link } from "react-router-dom";
 import PageBannerStart from "../Component/Course/PageBannerStart";
 
-export default function SolveProblem() {
-    const [problems, setProblems] = useState([]);
+export default function Contests() {
+    const [contest, setContest] = useState([]);
 
-    const getProblems = async () => {
+    const getContests = async () => {
         try {
             let email = localStorage.getItem('userEmail');
-            const {data: data} = await http.get(`frontend/fetch-contributes`, {
+            const {data: data} = await http.get(`frontend/fetch-contests`, {
                 params: {
                     email: email,
                 }
             });
 
-            setProblems(data.data);
+            setContest(data.data);
         } catch (error) {
             console.log(error)
         }
     }
 
     useEffect(() => {
-        getProblems();
+        getContests();
     }, []);
 
     return (
         <>
             <Header/>
             <Offcanvas/>
-            <PageBannerStart name="Contribute Problem"/>
+            <PageBannerStart name="Coding Contests"/>
             <div className="section section-padding">
                 <div className="container">
                     <div className='row'>
-                        <div class="d-flex justify-content-end">
-                            <a className="btn btn-outline-warning" style={{marginLeft: '13px'}}>
-                                <Link
-                                    className="text-black"
-                                    to={`/code-upload`}>Upload &nbsp; <i
-                                    className="fa fa-arrow-right"></i></Link>
-                            </a>
-
-                        </div>
-                        {problems.map((problem, index) => {
+                        {contest.map((contest, index) => {
                             return (
-                                <div className="col-lg-12" style={{margin: '1%'}} key={problem.id}>
+                                <div className="col-lg-12" style={{margin: '1%'}} key={contest.id}>
                                     <div className="card"
                                          style={{boxShadow: '0 4px 10px rgba(0,0,0,0.16), 0 4px 10px rgba(0,0,0,0.23)'}}>
                                         <div className="single-course-list p-4" style={{
@@ -55,20 +46,23 @@ export default function SolveProblem() {
                                             <div className="course-content">
                                                 <div className="top-meta">
                                                     <a className="tag" href="#">
-                                                        {problem.level.toUpperCase()}
-                                                    </a>
-                                                    <a className="tag" href="#">
-                                                        {problem.question_type.toUpperCase()}
+                                                        {contest.title.toUpperCase()}
                                                     </a>
                                                 </div>
                                                 <div className="d-flex justify-content-between">
                                                     <h3 className="title">
                                                         <Link
-                                                            to={`/solve-problem/${problem.slug}`}>{problem.title.toUpperCase()}</Link>
+                                                            to={`/contests/${contest.slug}`}>{contest.title.toUpperCase()}</Link>
                                                     </h3>
+
+                                                    <a className="btn btn-outline-primary">
+                                                    <Link
+                                                        className="text-black"
+                                                        to={`/solve-problem/${contest.slug}`}>Join It Now!</Link>
+                                                    </a>
                                                 </div>
                                                 <span
-                                                    dangerouslySetInnerHTML={{__html: problem.problem_statement.substr(0, 100) + '....'}}>
+                                                    dangerouslySetInnerHTML={{__html: '' + '....'}}>
                                                 </span>
                                             </div>
                                         </div>

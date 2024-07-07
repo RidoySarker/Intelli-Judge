@@ -300,6 +300,18 @@ const fetchContributes = async (request, response) => {
         .send(success(problems, 'problems fetched successfully', HTTP_OK));
 };
 
+const fetchContests = async (request, response) => {
+    let contests = await prisma.contest.findMany({
+        where: {
+            status: 1,
+        }
+    });
+
+    return response
+        .status(HTTP_OK)
+        .send(success(contests, 'contests fetched successfully', HTTP_OK));
+};
+
 const fetchUserProblems = async (request, response) => {
     let problems = await prisma.codingChallenge.findMany({
         where: {
@@ -588,6 +600,7 @@ export {
     checkUserSubscribedCourse,
     fetchProblems,
     fetchContributes,
+    fetchContests,
     fetchUserProblems,
     fetchSubmissions,
     fetchAllSubmissions,
