@@ -25,7 +25,7 @@ export default function Header() {
                             {/*style={{ marginLeft:'-40px' }}*/}
                             <li>
                                 <a href="/">
-                                    <img style={    {width: '24%'}} src="/intelli_judge.png" alt=""/>
+                                    <img style={{width: '24%'}} src="/intelli_judge.png" alt=""/>
                                 </a>
                             </li>
                             {/*<li style={{marginTop: '6px'}}>*/}
@@ -38,10 +38,10 @@ export default function Header() {
                             {/*<li style={{marginTop: '6px'}}>*/}
                             {/*    <Link to="/course">Course</Link>*/}
                             {/*</li>*/}
-                            {/*{isLoggedIn && (*/}
-                            {/*    <li style={{marginTop: '6px'}}>*/}
-                            {/*        <Link to="/quiz">Quiz</Link>*/}
-                            {/*    </li>)}*/}
+                            {isLoggedIn && (
+                                <li style={{marginTop: '6px'}}>
+                                    <Link to="/dashboard">Dashboard</Link>
+                                </li>)}
                             {isLoggedIn && (
                                 <li style={{marginTop: '6px'}}>
                                     <Link to="/solve-problem">Solve Problem</Link>
