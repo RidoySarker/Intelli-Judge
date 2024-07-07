@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-const ContestList = () => {
+const ContestList = ({contests, deleteContest}) => {
+
     return (
         <>
             <div className="card">
@@ -24,7 +25,27 @@ const ContestList = () => {
                             </tr>
                             </thead>
                             <tbody>
+                            {contests && contests.map((contest,index) =>{
+                                return (<tr key={index}>
+                                        <td>{ index + 1 }</td>
+                                        <td>{ contest.title }</td>
+                                        <td>{ contest.slug }</td>
+                                        <td>{ contest.accessCode }</td>
+                                        <td>{ contest.startTime }</td>
+                                        <td>{ contest.endTime }</td>
+                                        <td className="text-end">
+                                            {/*<button onClick={() => editCourse(contest.id)} className="btn btn-de-dashed-info">*/}
+                                            {/*    <i className="fa fa-edit"></i>*/}
+                                            {/*</button>*/}
 
+                                            <button className="btn btn-de-dashed-danger" onClick={() => deleteContest(contest.id)}>
+                                                <i className="fa fa-times"></i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                             </tbody>
                         </table>
                     </div>

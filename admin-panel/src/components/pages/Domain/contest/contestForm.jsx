@@ -26,7 +26,6 @@ const ContestForm = () => {
             end_time: Yup.string().required('End Time Is Required'),
         }), onSubmit: (values, {resetForm}) => {
             values['status'] = 1;
-            // values['problems'] = JSON.parse(values.problems);
             console.log({values});
             http.post(`/contest`, values, {
                 headers: {
