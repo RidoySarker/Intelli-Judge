@@ -2,6 +2,7 @@ import { Router } from 'express';
 import * as loginController from '../src/controllers/api/v1/auth/loginController';
 import * as courseCategoryController from '../src/controllers/api/v1/courseCategory/courseCategoryController';
 import * as courseController from '../src/controllers/api/v1/course/courseController';
+import * as contestApiController from '../src/controllers/api/v1/contest/contestApiController';
 import * as courseContentCategoryController from '../src/controllers/api/v1/courseContentCategory/courseContentCategoryController';
 import * as courseContentController from '../src/controllers/api/v1/courseContent/courseContentController';
 import * as courseQuestionController from '../src/controllers/api/v1/courseQuestion/courseQuestionController';
@@ -51,6 +52,7 @@ import { contentDetails } from '../src/controllers/api/v1/courseContent/fetchCou
 import { generateQuestion } from '../src/controllers/api/v1/questionGenerate/questionGenerateController';
 import { submission } from '../src/controllers/api/v1/online-judge/submissionController';
 import { userCodeUpload } from '../src/controllers/api/v1/online-judge/UserCodeUploadController';
+import contestRequestValidate from "../src/formRequests/v1/contest/contestRequestValidate";
 
 const fileUpload = require('express-fileupload');
 
@@ -99,6 +101,13 @@ router.get('/courses/:id', courseController.show);
 router.put('/courses/:id', fileUpload(), courseUpdateRequestValidate(), courseController.update);
 router.delete('/courses/:id', courseController.destroy);
 router.post('/course-learn/:id', courseController.courseLearn);
+
+//contest
+router.get('/contest', contestApiController.index);
+router.post('/contest', fileUpload(), contestRequestValidate(), contestApiController.store);
+router.get('/contest/:id', contestApiController.show);
+router.put('/contest/:id', courseUpdateRequestValidate(), contestApiController.update);
+router.delete('/contest/:id', contestApiController.destroy);
 
 // course Content Category
 router.get('/course-content-category', courseContentCategoryController.index);

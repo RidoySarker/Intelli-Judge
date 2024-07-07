@@ -9,6 +9,7 @@ import {
 } from "../../../../constants/statusCode";
 import logger from "../../../../services/logger/loggerService";
 import { validationResult } from "express-validator";
+import moment from "moment";
 
 const index = async (request, response) => {
     try {
@@ -46,16 +47,19 @@ const store = async (request, response) => {
             start_time,
             end_time,
             status,
+            problems,
         } = request.body;
+        console.log(problems, request.body);
 
         const contest = await prisma.contest.create({
             data: {
                 title: title,
                 slug: slug,
                 accessCode: access_code,
-                startTime: start_time,
-                endTime: end_time,
-                status: status,
+                startTime: new Date(start_time),
+                endTime: new Date(end_time),
+                status: Number(status),
+                problems: problems,
             }
         });
 
@@ -122,3 +126,5 @@ const destroy = async (request, response) => {
         return response.status(HTTP_INTERNAL_SERVER_ERROR).send(error(exception.message));
     }
 }
+
+export {index, store, show, update, destroy};

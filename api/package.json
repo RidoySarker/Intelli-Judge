@@ -34,6 +34,7 @@
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "ncp": "^2.0.0",
+    "react-select": "^5.8.0",
     "supertest": "^6.3.3",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.2",

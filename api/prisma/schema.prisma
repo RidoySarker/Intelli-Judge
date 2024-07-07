@@ -301,6 +301,7 @@ model contest {
   accessCode String   @map("access_code")
   startTime  DateTime @map("start_time")
   endTime    DateTime @map("end_time")
+  problems   Json     @map("problems")
   status     Int      @map("status")
   createdAt  DateTime @default(now()) @map("created_at")
 

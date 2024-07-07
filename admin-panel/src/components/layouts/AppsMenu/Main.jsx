@@ -14,36 +14,6 @@ const Main = () => {
                     </div>
                     <ul className="nav flex-column">
 
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/course-categories" ? 'nav-link' : 'nav-link-disable'}*/}
-                        {/*          to="/course-categories">Course Categories</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/courses" ? 'nav-link' : 'nav-link-disable'} to="/courses">Courses</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/course-content-categories" ? 'nav-link' : 'nav-link-disable'} to="/course-content-categories">Course Chapters</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/course-content" ? 'nav-link' : 'nav-link-disable'} to="/course-content">Chapter Content </Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/course-question" ? 'nav-link' : 'nav-link-disable'} to="/course-question">Course Questions</Link>*/}
-                        {/*</li>*/}
-
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className="nav-link" to="/">Subscribed Course</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className="nav-link" to="/">Course Progress</Link>*/}
-                        {/*</li>*/}
-
                         <li className="nav-item">
                             <Link
                                 className={location.pathname === "/coding-challenge-list" ? 'nav-link' : 'nav-link-disable'}
@@ -56,21 +26,14 @@ const Main = () => {
                                 to="/user-contribute-list">User Contribute </Link>
                         </li>
 
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/quizs" ? 'nav-link' : 'nav-link-disable'} to="/quizs">Quiz</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/quiz-questions" ? 'nav-link' : 'nav-link-disable'} to="/quiz-questions">Quiz Questions</Link>*/}
-                        {/*</li>*/}
-
-                        {/*<li className="nav-item">*/}
-                        {/*    <Link className={location.pathname === "/instructors" ? 'nav-link' : 'nav-link-disable'} to="/instructors">Course Instructor</Link>*/}
-                        {/*</li>*/}
-
                         <li className="nav-item">
                             <Link className={location.pathname === "/submissions" ? 'nav-link' : 'nav-link-disable'}
                                   to="/submissions">Coding Submission</Link>
+                        </li>
+
+                        <li className="nav-item">
+                            <Link className={location.pathname === "/contest" ? 'nav-link' : 'nav-link-disable'}
+                                  to="/contest">Coding Contest</Link>
                         </li>
 
                         <li className="nav-item">
