@@ -11,7 +11,6 @@ import http from "../interceptors/http";
 const today = new Date();
 const Dashboard = () => {
     const [donutSeries, setDonutSeriesState] = useState([44, 55, 41]);
-
     const [donutOptions, setDonutOptionsState] = useState({
         chart: {
             type: 'radialBar',
@@ -29,7 +28,7 @@ const Dashboard = () => {
             }
         },
         colors: ["#1cbaba", "#ffb700", "#f63737"],
-        labels: ["Easy", "Medium", "Hard"],
+        labels: ["Beginner", "Intermediate", "Advance"],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -42,19 +41,14 @@ const Dashboard = () => {
             }
         }]
     });
-
+    const [calendarHeatmap, setCalendarHeatmap] = useState([]);
+    const [submissions, setSubmissions] = useState([]);
+    const [user, setUserState] = useState({});
     const shiftDate = (date, numDays) => {
         const newDate = new Date(date);
         newDate.setDate(newDate.getDate() + numDays);
         return newDate;
     }
-
-    const randomValues = getRange(200).map(index => {
-        return {
-            date: shiftDate(today, -index),
-            count: getRandomInt(1, 3),
-        };
-    });
 
     function getRange(count) {
         return Array.from({length: count}, (_, i) => i);
@@ -67,16 +61,20 @@ const Dashboard = () => {
     const fetchDashboardData = async () => {
         try {
             let email = localStorage.getItem('userEmail');
-            const {data: data} = await http.get(`/frontend/fetch-dashboard`, {
+            const {data: {data: data}} = await http.get(`/frontend/fetch-dashboard`, {
                 params: {
                     email: email,
                 }
             });
-            console.log({data});
+            setDonutSeriesState(data?.levelWiseValue);
+            setCalendarHeatmap(data?.dateWiseSubmissions);
+            setSubmissions(data?.submissions);
+            setUserState(data?.user);
         } catch (error) {
             console.log(error);
         }
     }
+    const convertToTitleCase = w => w.split(' ').map(w => w[0].toUpperCase() + w.slice(1).toLowerCase()).join(' ');
 
     useEffect(() => {
         fetchDashboardData();
@@ -95,7 +93,7 @@ const Dashboard = () => {
                             <img src="https://h-o-m-e.org/wp-content/uploads/2022/04/Blank-Profile-Picture-3.jpg"
                                  style={{borderRadius: '50%'}}
                                  alt="Avatar"/>
-                            <center><h3>Name</h3></center>
+                            <center><h3>{[user.firstName, user.lastName].join(' ')}</h3></center>
                         </div>
                     </div>
                     <div className="col-lg-10">
@@ -116,9 +114,10 @@ const Dashboard = () => {
                                                  justifyContent: "center",
                                                  backgroundColor: "#00000005",
                                                  minWidth: "5vw",
+                                                 alignItems: 'center',
                                              }}>
-                                            <p style={{color: "#1cbaba"}}><strong>Easy</strong></p>
-                                            <p>25/808</p>
+                                            <p style={{color: "#1cbaba"}}><strong>Beginner</strong></p>
+                                            <p>{donutSeries[0]}/808</p>
                                         </div>
                                     </div>
                                     <div className="card">
@@ -128,9 +127,10 @@ const Dashboard = () => {
                                                  justifyContent: "center",
                                                  backgroundColor: "#00000005",
                                                  minWidth: "5vw",
+                                                 alignItems: 'center',
                                              }}>
-                                            <p style={{color: "#ffb700"}}><strong>Med</strong></p>
-                                            <p>4/1682</p>
+                                            <p style={{color: "#ffb700"}}><strong>Intermediate</strong></p>
+                                            <p>{donutSeries[1]}/1682</p>
                                         </div>
                                     </div>
                                     <div className="card">
@@ -140,9 +140,10 @@ const Dashboard = () => {
                                                  justifyContent: "center",
                                                  backgroundColor: "#00000005",
                                                  minWidth: "5vw",
+                                                 alignItems: 'center',
                                              }}>
-                                            <p style={{color: "#f63737"}}><strong>Hard</strong></p>
-                                            <p>0/714</p>
+                                            <p style={{color: "#f63737"}}><strong>Advanced</strong></p>
+                                            <p>{donutSeries[2]}/714</p>
                                         </div>
                                     </div>
                                 </div>
@@ -153,12 +154,13 @@ const Dashboard = () => {
                 <div className="row mt-1">
                     <div className="col-lg-2"></div>
                     <div className="col-lg-10">
-                        <div className="card" style={{height: "35vh"}}>
-                            <h3 className="p-1">0 Submission last 150days</h3>
+                        <div className="card" style={{height: "50vh"}}>
+                            <h3 className="p-1">{calendarHeatmap.reduce((a, c) => a + c.count, 0)} Submission last
+                                150days</h3>
                             <CalendarHeatmap
-                                startDate={shiftDate(today, -200)}
+                                startDate={shiftDate(today, -150)}
                                 endDate={today}
-                                values={randomValues}
+                                values={calendarHeatmap}
                                 classForValue={value => {
                                     if (!value) {
                                         return 'color-empty';
@@ -167,13 +169,44 @@ const Dashboard = () => {
                                 }}
                                 tooltipDataAttrs={value => {
                                     return {
-                                        'data-tip': `${value.date.toISOString().slice(0, 10)} has count: ${
+                                        'data-tip': `${new Date(value.date).toISOString().slice(0, 10)} has count: ${
                                             value.count
                                         }`,
                                     };
                                 }}
                                 showWeekdayLabels={true}
                             />
+                        </div>
+                    </div>
+                </div>
+                <div className="row mt-1">
+                    <div className="col-lg-2"></div>
+                    <div className="col-lg-10">
+                        <div className="card">
+                            <table className="table ">
+                                <thead>
+                                <tr>
+                                    <th>Problem</th>
+                                    <th>Language</th>
+                                    <th>Runtime</th>
+                                    <th>Status</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {submissions.length > 0 ? (submissions.map(submission => <>
+                                    <tr>
+                                        <td>{convertToTitleCase(submission?.question?.title)}</td>
+                                        <td>{convertToTitleCase(submission?.language)}</td>
+                                        <td>{submission?.run_time} ms</td>
+                                        <td>
+                                            <div
+                                                className={submission?.status == 'pass' ? 'badge bg-success' : 'badge bg-danger'}>{convertToTitleCase(submission?.status)}
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </>)) : <></>}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

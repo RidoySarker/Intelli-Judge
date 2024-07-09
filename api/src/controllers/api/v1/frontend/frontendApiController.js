@@ -2,6 +2,7 @@ import prisma from '../../../../services/prisma/prisma';
 import {error, success} from '../../../../helpers/apiResponse';
 import {HTTP_INTERNAL_SERVER_ERROR, HTTP_OK} from '../../../../constants/statusCode';
 import logger from '../../../../services/logger/loggerService';
+import {eachDayOfInterval, format} from 'date-fns';
 import collect from 'collect.js';
 
 const fetchCourse = async (request, response) => {
@@ -585,6 +586,9 @@ const fetchDashboard = async (request, response) => {
         where: {
             'userId': parseInt(user.id),
         },
+        orderBy: {
+            id: 'desc',
+        },
         include: {
             question: {
                 select: {
@@ -598,19 +602,59 @@ const fetchDashboard = async (request, response) => {
             }
         }
     });
-    const countLeveWise = await prisma.codingChallenge.groupBy({
-        by: ['level'],
-        _count: {
-            level: true,
-        },
+    const codingChallenges = await prisma.codingChallenge.findMany({
         where: {
             id: {
                 in: submissions.map(x => x.questionId)
             }
         }
     });
-    console.log({countLeveWise});
-    return response.status(HTTP_OK).send(success(submissions, 'fetched successfully', HTTP_OK));
+    const LEVELS = [
+        {
+            name: 'beginner',
+            count: 0,
+        },
+        {
+            name: 'intermediate',
+            count: 0,
+        },
+        {
+            name: 'expert',
+            count: 0,
+        }
+    ];
+    let levelWiseValue = [];
+    codingChallenges.map(x => {
+        LEVELS.map((l, i) => {
+            if (l.name === x.level) {
+                l.count++;
+            }
+            levelWiseValue[i] = l.count;
+            return l;
+        })
+    });
+
+    const dateRange = eachDayOfInterval({
+        start: new Date(),
+        end: new Date().setDate(new Date().getDate() - 150),
+    });
+    let dateWiseSubmissions = [];
+    submissions.map(submission => {
+        dateRange.map(date => {
+            const formattedDate = format(date, 'yyyy-MM-dd');
+            dateWiseSubmissions.push({
+                date: formattedDate,
+                count: (dateWiseSubmissions[formattedDate] ? dateWiseSubmissions[formattedDate] : 0)
+                    + (format(submission.createdAt, 'yyyy-MM-dd') === formattedDate)
+            });
+        })
+    });
+    return response.status(HTTP_OK).send(success({
+        submissions,
+        levelWiseValue: levelWiseValue,
+        dateWiseSubmissions,
+        user,
+    }, 'fetched successfully', HTTP_OK));
 }
 
 export {
