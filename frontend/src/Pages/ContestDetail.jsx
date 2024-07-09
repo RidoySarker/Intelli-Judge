@@ -55,6 +55,7 @@ export default function ContestDetail() {
             <div className="section section-padding">
                 <div className="container">
                     <div className='row'>
+
                         {problems.length && problems.map((problem, index) => {
                             return (
                                 <div className="col-lg-12" style={{margin: '1%'}} key={problem.id}>
