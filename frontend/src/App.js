@@ -20,6 +20,7 @@ import MySubmissions from "./Pages/MySubmissions";
 import UserReferralList from "./Pages/UserReferralList";
 import Dashboard from "./Pages/Dashboard";
 import Contests from "./Pages/Contests";
+import ContestDetail from "./Pages/ContestDetail";
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
           <Route path='/solve-problem' element={<SolveProblem />} />
           <Route path='/contribute' element={<Contribute />} />
           <Route path='/contests' element={<Contests />} />
+          <Route path='/contests/:slug' element={<ContestDetail />} />
           <Route path='/code-upload' element={<CodeUpload />} />
           <Route path='/my-submissions' element={<MySubmissions />} />
           <Route path='/solve-problem/:question_id' element={<SolveProblemDetails />} />

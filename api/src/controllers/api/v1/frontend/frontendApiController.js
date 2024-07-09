@@ -2,6 +2,7 @@ import prisma from '../../../../services/prisma/prisma';
 import {error, success} from '../../../../helpers/apiResponse';
 import {HTTP_INTERNAL_SERVER_ERROR, HTTP_OK} from '../../../../constants/statusCode';
 import logger from '../../../../services/logger/loggerService';
+import collect from 'collect.js';
 
 const fetchCourse = async (request, response) => {
     try {
@@ -312,6 +313,31 @@ const fetchContests = async (request, response) => {
         .send(success(contests, 'contests fetched successfully', HTTP_OK));
 };
 
+const fetchContest = async (request, response) => {
+    let contest = await prisma.contest.findFirst({
+        where: {
+            slug: request.body.slug,
+        }
+    });
+
+    let problems = [];
+
+    if (contest && contest.problems) {
+        const problemsId = contest.problems.map(problem => problem.option);
+        problems = await prisma.codingChallenge.findMany({
+            where: {
+                id: {
+                    in: problemsId,
+                }
+            }
+        })
+    }
+
+    return response
+        .status(HTTP_OK)
+        .send(success({contest, problems}, 'contest fetched successfully', HTTP_OK));
+};
+
 const fetchUserProblems = async (request, response) => {
     let problems = await prisma.codingChallenge.findMany({
         where: {
@@ -601,6 +627,7 @@ export {
     fetchProblems,
     fetchContributes,
     fetchContests,
+    fetchContest,
     fetchUserProblems,
     fetchSubmissions,
     fetchAllSubmissions,

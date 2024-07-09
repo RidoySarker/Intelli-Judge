@@ -271,6 +271,7 @@ router.get('/frontend/fetch-quiz-question/:id', frontendApiController.quizQuesti
 router.get('/frontend/fetch-problems', frontendApiController.fetchProblems);
 router.get('/frontend/fetch-contributes', frontendApiController.fetchContributes);
 router.get('/frontend/fetch-contests', frontendApiController.fetchContests);
+router.get('/frontend/fetch-slug-wise-contest', frontendApiController.fetchContest);
 router.get('/frontend/fetch-user-problems', frontendApiController.fetchUserProblems);
 router.get('/frontend/fetch-submissions/:email', frontendApiController.fetchSubmissions);
 router.get('/frontend/fetch-all-submissions', frontendApiController.fetchAllSubmissions);

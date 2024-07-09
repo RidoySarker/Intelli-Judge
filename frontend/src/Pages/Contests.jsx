@@ -4,22 +4,59 @@ import React, { useEffect, useState } from "react";
 import http from "../interceptors/http";
 import { Link } from "react-router-dom";
 import PageBannerStart from "../Component/Course/PageBannerStart";
+import Modal from 'react-modal';
+import { toast, ToastContainer } from "react-toastify";
+
+const customStyles = {
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        width: '30%',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
 
 export default function Contests() {
     const [contest, setContest] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const [code, setCode] = useState("");
+    const [selectedSlug, setSelectedSlug] = useState("");
+    const [selectedCode, setSelectedCode] = useState("");
+
+    const openModal = (slug, accessCode) => {
+        setIsOpen(true);
+        setSelectedSlug(slug);
+        setSelectedCode(accessCode);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+        setSelectedSlug("");
+        setSelectedCode("");
+    }
 
     const getContests = async () => {
         try {
-            let email = localStorage.getItem('userEmail');
-            const {data: data} = await http.get(`frontend/fetch-contests`, {
-                params: {
-                    email: email,
-                }
-            });
-
+            const {data: data} = await http.get(`frontend/fetch-contests`);
             setContest(data.data);
         } catch (error) {
             console.log(error)
+        }
+    }
+
+    const enterContest = (event) => {
+        event.preventDefault();
+
+        if (code === selectedCode) {
+            window.location = `/contests/${selectedSlug}`;
+        } else {
+            setIsOpen(false);
+            setSelectedSlug("");
+            setSelectedCode("");
+            toast.warning('Access code invalid!');
         }
     }
 
@@ -31,6 +68,7 @@ export default function Contests() {
         <>
             <Header/>
             <Offcanvas/>
+            <ToastContainer/>
             <PageBannerStart name="Coding Contests"/>
             <div className="section section-padding">
                 <div className="container">
@@ -56,9 +94,10 @@ export default function Contests() {
                                                     </h3>
 
                                                     <a className="btn btn-outline-primary">
-                                                    <Link
-                                                        className="text-black"
-                                                        to={`/contests/${contest.slug}`}>Join It Now!</Link>
+                                                        <div
+                                                            onClick={() => openModal(contest.slug, contest.accessCode)}
+                                                            className="text-black">Join It Now!
+                                                        </div>
                                                     </a>
                                                 </div>
                                                 <span
@@ -73,8 +112,37 @@ export default function Contests() {
 
                     </div>
                 </div>
-            </div>
 
+                <Modal
+                    isOpen={isOpen}
+                    onRequestClose={closeModal}
+                    style={customStyles}
+                    contentLabel="Example Modal"
+                >
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                    }}>
+                        <h2>Enter Access Code</h2>
+                    </div>
+                    <form onSubmit={enterContest}>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input
+                                    type="test"
+                                    className="form-control form-control-sm"
+                                    placeholder="Enter contest access code..."
+                                    onChange={(e) => setCode(e?.target?.value)}
+                                />
+                            </div>
+                            <div class="col-md-12 text-end">
+                                <button type="submit" className="btn text-success">Submit</button>
+                                <button type="button" className="btn text-danger" onClick={closeModal}>Close</button>
+                            </div>
+                        </div>
+                    </form>
+                </Modal>
+            </div>
         </>
     )
 }
