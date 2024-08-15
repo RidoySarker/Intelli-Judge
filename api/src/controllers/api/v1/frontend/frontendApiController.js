@@ -324,7 +324,7 @@ const fetchContest = async (request, response) => {
     let problems = [];
 
     if (contest && contest.problems) {
-        const problemsId = contest.problems.map(problem => problem.option);
+        const problemsId = contest.problems.map(problem => problem.value);
         problems = await prisma.codingChallenge.findMany({
             where: {
                 id: {

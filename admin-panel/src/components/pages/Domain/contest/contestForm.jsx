@@ -2,13 +2,12 @@ import { toast, ToastContainer } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import http from "../../../../interceptors/http";
-import Select from 'react-select';
-import makeAnimated from 'react-select/animated';
+import { MultiSelect } from "react-multi-select-component";
 import { useEffect, useState } from "react";
 
 const ContestForm = () => {
     const [formValues, setFormValues] = useState([{title: ""}])
-    const [problems, setProblems] = useState([]);
+    const [problemsList, setProblemsList] = useState([]);
     const contestForm = useFormik({
         initialValues: {
             title: '',
@@ -45,11 +44,11 @@ const ContestForm = () => {
             const {data: data} = await http.get(`/frontend/fetch-problems`);
             let options = data?.data?.map(item => {
                 return {
-                    option: item.id,
+                    value: item.id,
                     label: item.title,
                 }
             })
-            setProblems(options);
+            setProblemsList(options);
         } catch (error) {
             console.log(error)
         }
@@ -151,15 +150,22 @@ const ContestForm = () => {
 
                             <div className="col-md-12">
                                 <label htmlFor="problems" className="form-label">Problems</label>
-                                <Select
-                                    name={"problems"}
-                                    id={"problems"}
-                                    options={problems}
-                                    components={makeAnimated()}
-                                    defaultValue={contestForm.values.problems}
+                                <MultiSelect
+                                    options={problemsList}
+                                    value={contestForm.values.problems}
                                     onChange={problem => contestForm.setFieldValue("problems", problem)}
-                                    isMulti
+                                    labelledBy="Select"
                                 />
+                                {/*<Select*/}
+                                {/*    isMulti*/}
+                                {/*    name={"problems"}*/}
+                                {/*    id={"problems"}*/}
+                                {/*    options={problemsList}*/}
+                                {/*    // components={makeAnimated()}*/}
+                                {/*    // value={contestForm.values.problems}*/}
+                                {/*    // setValue={setProblemsList}*/}
+                                {/*    onChange={problem => contestForm.setFieldValue("problems", contestForm.values.problems)}*/}
+                                {/*/>*/}
                                 <div className="text-danger">
                                     {contestForm.touched.problems && contestForm.errors.problems && (
                                         <div>{contestForm.errors.problems}</div>
