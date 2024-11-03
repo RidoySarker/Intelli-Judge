@@ -61,7 +61,7 @@ const store = async (request, response) => {
                 status: Number(status),
                 problems: problems,
             }
-        });
+        }); 
 
         return response.status(HTTP_OK).send(success(contest, 'contest created successfully', HTTP_CREATED));
     } catch (exception) {

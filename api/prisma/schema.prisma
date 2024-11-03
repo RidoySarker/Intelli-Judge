@@ -44,6 +44,7 @@ model User {
   Submission           Submission[]
   referralToken        referralToken[]
   CodingChallenge      CodingChallenge[]
+  ContestSubmission    ContestSubmission[]
 
   @@map("users")
 }
@@ -254,8 +255,9 @@ model CodingChallenge {
   userId            Int?   @map("user_id")
   is_approved       Int    @default(0) @db.Int
 
-  user       User?        @relation(fields: [userId], references: [id])
-  Submission Submission[]
+  user              User?               @relation(fields: [userId], references: [id])
+  Submission        Submission[]
+  ContestSubmission ContestSubmission[]
 
   @@map("coding_challenges")
 }
@@ -295,15 +297,33 @@ model referralToken {
 }
 
 model contest {
-  id         Int      @id @default(autoincrement())
-  title      String   @map("title")
-  slug       String   @map("slug")
-  accessCode String   @map("access_code")
-  startTime  DateTime @map("start_time")
-  endTime    DateTime @map("end_time")
-  problems   Json     @map("problems")
-  status     Int      @map("status")
-  createdAt  DateTime @default(now()) @map("created_at")
+  id                Int                 @id @default(autoincrement())
+  title             String              @map("title")
+  slug              String              @map("slug")
+  accessCode        String              @map("access_code")
+  startTime         DateTime            @map("start_time")
+  endTime           DateTime            @map("end_time")
+  problems          Json                @map("problems")
+  status            Int                 @map("status")
+  createdAt         DateTime            @default(now()) @map("created_at")
+  ContestSubmission ContestSubmission[]
 
   @@map("contest")
+}
+
+model ContestSubmission {
+  id         Int      @id @default(autoincrement())
+  contestId  Int      @map("contest_id")
+  questionId Int      @map("question_id")
+  userId     Int      @map("user_id")
+  status     String   @db.Text
+  language   String   @db.Text
+  run_time   String   @db.Text
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user     User?            @relation(fields: [userId], references: [id])
+  question CodingChallenge? @relation(fields: [questionId], references: [id])
+  contest  contest?         @relation(fields: [contestId], references: [id])
+
+  @@map("contest_submissions")
 }

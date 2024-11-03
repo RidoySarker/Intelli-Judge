@@ -47,12 +47,13 @@ const SolveContestProblem = () => {
     const [m, setm] = useState("")
 
     const [Q, setQ] = useState()
+    const [contest, setContest] = useState()
 
     function onChange(newValue) {
         setCode(newValue);
     }
 
-    let {question_id} = useParams();
+    let {slug, question_id} = useParams();
 
     const getProblemDetails = async () => {
         try {
@@ -65,8 +66,23 @@ const SolveContestProblem = () => {
         }
     }
 
+    const getContest = async () => {
+        try {
+            const {data: data} = await http.get(`frontend/fetch-slug-wise-contest`, {
+                params: {
+                    slug: slug,
+                }
+            });
+
+            setContest(data?.data?.contest);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getProblemDetails();
+        getContest();
     }, []);
 
     const run = () => {
@@ -86,6 +102,7 @@ const SolveContestProblem = () => {
         const data = {
             user_email: userEmail,
             slug: Q.slug,
+            contest_id: contest.id,
             question_id: Q.id,
             language: lang,
             solution: code

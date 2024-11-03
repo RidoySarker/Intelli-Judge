@@ -11,7 +11,7 @@ const submission = async (request, response) => {
     try {
 
         let start = moment(new Date(Date.now()));
-        const {question_id, user_email, slug, solution} = request.body;
+        const {contest_id, question_id, user_email, slug, solution} = request.body;
         const user = await prisma.user.findFirst({
             where: {email: user_email},
         });
@@ -35,19 +35,39 @@ const submission = async (request, response) => {
                         moment(start, "DD/MM/YYYY HH:mm:ss")
                     );
                     console.log(ms)
-                    const submission = await prisma.submission.create({
-                        data: {
-                            question: {
-                                connect: {id: parseInt(question_id)}
-                            },
-                            user: {
-                                connect: {id: parseInt(user?.id)}
-                            },
-                            status: status,
-                            language: "python",
-                            run_time : String(ms)
-                        }
-                    });
+
+                    if (contest_id) {
+                        const submission = await prisma.contestSubmission.create({
+                            data: {
+                                contest: {
+                                    connect: {id: parseInt(contest_id)}
+                                },
+                                question: {
+                                    connect: {id: parseInt(question_id)}
+                                },
+                                user: {
+                                    connect: {id: parseInt(user?.id)}
+                                },
+                                status: status,
+                                language: "python",
+                                run_time : String(ms)
+                            }
+                        });
+                    } else {
+                        const submission = await prisma.submission.create({
+                            data: {
+                                question: {
+                                    connect: {id: parseInt(question_id)}
+                                },
+                                user: {
+                                    connect: {id: parseInt(user?.id)}
+                                },
+                                status: status,
+                                language: "python",
+                                run_time : String(ms)
+                            }
+                        });
+                    }
                     console.log({
                         targetDir,
                         submission
