@@ -11,7 +11,7 @@ export default function MySubmissions() {
     const getProblems = async () => {
         try {
             const {data: data} = await http.get(`frontend/fetch-submissions/${email}`);
-            setSubmissions(data.data);
+            setSubmissions(data.data.reverse());
         } catch (error) {
             console.log(error)
         }

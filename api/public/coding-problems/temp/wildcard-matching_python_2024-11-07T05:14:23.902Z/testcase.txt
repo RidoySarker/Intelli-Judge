@@ -1,0 +1,13 @@
+def generate_test_cases():
+    return [
+        {"s": "abc", "p": "a?c", "expected": True},  # '?' matches one character
+        {"s": "abc", "p": "a*", "expected": True},   # '*' matches zero or more characters
+        {"s": "abcdef", "p": "a*f", "expected": True}, # '*' in the middle
+        {"s": "abcdef", "p": "*f", "expected": True},  # '*' at start
+        {"s": "abcdef", "p": "*e", "expected": False}, # non-matching end character
+        {"s": "", "p": "*", "expected": True},         # '*' matches empty string
+        {"s": "abcdef", "p": "", "expected": False},   # empty pattern should not match non-empty string
+        {"s": "abcd", "p": "a?c*", "expected": True},  # '?' followed by '*'
+        {"s": "abcdef", "p": "abc?ef", "expected": True}, # '?' matching in between
+        {"s": "abcdef", "p": "a*d*f", "expected": True},   # multiple '*' in pattern
+    ]

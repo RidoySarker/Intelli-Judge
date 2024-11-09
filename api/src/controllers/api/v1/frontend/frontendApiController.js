@@ -639,15 +639,26 @@ const fetchDashboard = async (request, response) => {
         end: new Date().setDate(new Date().getDate() - 150),
     });
     let dateWiseSubmissions = [];
-    submissions.map(submission => {
-        dateRange.map(date => {
+    submissions.forEach(submission => {
+        dateRange.forEach(date => {
             const formattedDate = format(date, 'yyyy-MM-dd');
-            dateWiseSubmissions.push({
-                date: formattedDate,
-                count: (dateWiseSubmissions[formattedDate] ? dateWiseSubmissions[formattedDate] : 0)
-                    + (format(submission.createdAt, 'yyyy-MM-dd') === formattedDate)
-            });
-        })
+            
+            // Check if the date already exists in the dateWiseSubmissions array
+            const existingSubmission = dateWiseSubmissions.find(x => x.date === formattedDate);
+            
+            // If it exists, increment the count
+            if (existingSubmission) {
+                if (format(submission.createdAt, 'yyyy-MM-dd') === formattedDate) {
+                    existingSubmission.count += 1;
+                }
+            } else {
+                // If it doesn't exist, add a new entry
+                dateWiseSubmissions.push({
+                    date: formattedDate,
+                    count: format(submission.createdAt, 'yyyy-MM-dd') === formattedDate ? 1 : 0
+                });
+            }
+        });
     });
     return response.status(HTTP_OK).send(success({
         submissions,

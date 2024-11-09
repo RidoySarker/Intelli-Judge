@@ -25,7 +25,7 @@ export default function Header() {
                             {/*style={{ marginLeft:'-40px' }}*/}
                             <li>
                                 <a href="/">
-                                    <img style={{width: '24%'}} src="/intelli_judge.png" alt=""/>
+                                    <img style={{width: '50%'}} src="/intelli_judge.png" alt=""/>
                                 </a>
                             </li>
                             {/*<li style={{marginTop: '6px'}}>*/}

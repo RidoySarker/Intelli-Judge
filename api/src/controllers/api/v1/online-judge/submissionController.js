@@ -4,7 +4,6 @@ import logger from "../../../../services/logger/loggerService";
 import RunnerManager from "../../../../services/onlineJudge/RunnerManager"
 import moment from "moment";
 import * as fs from "fs";
-import {sleep} from "../../../../services/onlineJudge/Sleeper";
 import prisma from "../../../../services/prisma/prisma";
 
 const submission = async (request, response) => {
